@@ -6,21 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>音乐播放器</title>
     <link rel="stylesheet" href="./css/index.css" />
-    <link rel="icon" type="images/png" href="./logo.png"/>
+    <link rel="icon" type="image/png" href="./logo.png" />
   </head>
   <body>
-    <!-- 添加背景图片容器 -->
+    <!-- 背景图片容器 -->
     <div id="background-image"></div>
     <div id="background-contain">
       <h1>欢迎来到jh音乐播放器</h1>
-      <div id="player">
-        <audio id="audio" src="./audio/晴天.mp3" controls></audio>
-        <div class="button-container">
-          <button id="prev-btn">上一首</button>
-          <button id="next-btn">下一首</button>
+
+      <div id="song-place">
+        <!-- 歌曲信息容器 -->
+        <div id="song-info">
+          <h2 id="song-title">歌曲名称</h2>
+          <p id="song-artist">歌手名称</p>
+
+          <div class="lyrics-container">
+            <div class="lyrics-column" id="lyrics-left"></div>
+            <div class="lyrics-column" id="lyrics-right"></div>
+          </div>
+        </div>
+
+        <div id="player">
+          <audio id="audio" src="./audio/晴天.mp3" controls></audio>
+          <div class="button-container">
+            <button id="prev-btn">上一首</button>
+            <button id="next-btn">下一首</button>
+          </div>
         </div>
       </div>
     </div>
+
     <script src="./js/index.js"></script>
   </body>
 </html>

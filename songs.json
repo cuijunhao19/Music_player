@@ -3,12 +3,42 @@
     "name": "晴天",
     "audio_url": "./audio/晴天.mp3",
     "singer": "周杰伦",
-    "img": "./img/晴天.png"
+    "img": "./img/晴天.png",
+    "lrc_url": "./lrc/晴天-周杰伦.lrc"
   },
   {
     "name": "跳楼机",
     "audio_url": "./audio/跳楼机.mp3",
-    "singer": "网络歌手",
-    "img": "./img/跳楼机.png"
+    "singer": "LBI利比",
+    "img": "./img/跳楼机.png",
+    "lrc_url": "./lrc/跳楼机-LBI利比.lrc"
+  },
+  {
+    "name": "单车",
+    "audio_url": "./audio/单车.mp3",
+    "singer": "陈奕迅",
+    "img": "https://img2.kuwo.cn/star/albumcover/120/s4s73/65/381920143.jpg",
+    "lrc_url": "./lrc/单车-陈奕迅.lrc"
+  },
+  {
+    "name": "十年",
+    "audio_url": "./audio/十年.mp3",
+    "singer": "陈奕迅",
+    "img": "https://img2.kuwo.cn/star/albumcover/120/s4s86/18/1347897214.jpg",
+    "lrc_url": "./lrc/十年-陈奕迅.lrc"
+  },
+  {
+    "name": "最佳损友",
+    "audio_url": "./audio/最佳损友.mp3",
+    "singer": "陈奕迅",
+    "img": "https://img2.kuwo.cn/star/albumcover/120/s4s70/73/2952667475.jpg",
+    "lrc_url": "./lrc/最佳损友-陈奕迅.lrc"
+  },
+  {
+    "name": "手写的从前",
+    "audio_url": "./audio/手写的从前.mp3",
+    "singer": "周杰伦",
+    "img": "https://img2.kuwo.cn/star/albumcover/120/47/63/494275386.jpg",
+    "lrc_url": "./lrc/手写的从前-周杰伦.lrc"
   }
 ]
