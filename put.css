@@ -38,17 +38,6 @@ h1 {
   align-items: center;
 }
 
-.button-container {
-  display: flex;
-  gap: 10px; /* 设置按钮之间的间距 */
-  margin-top: 5px; /* 设置按钮与 audio 元素之间的间距 */
-}
-
-button {
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
 /* 添加背景图片样式 */
 #background-image {
   position: absolute;
@@ -56,29 +45,57 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../img/晴天.png);
+  background-image: url(../img/山间阶梯-晴空.png);
   background-size: cover;
   background-position: center;
-  filter: blur(10px); /* 背景模糊效果 */
+  filter: blur(0px); /* 背景模糊效果 */
   z-index: 0; /* 设置 z-index 确保背景在播放器内容之下 */
 }
 
-.song-info {
-  margin-bottom: 20px;
+/* 原有样式保持不变，新增以下优化部分 */
+
+#song-place {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  opacity: 0.8;
+  /* 修正 padding 错误并增加美观属性 */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  max-width: 800px;
+  width: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#song-place:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* 歌曲信息区域优化 */
+#song-info {
+  width: 100%;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 #song-title {
-  font-size: 24px;
-  margin-bottom: 5px;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #333;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #song-artist {
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
+/* 歌词容器优化 */
 .lyrics-container {
   display: flex;
   justify-content: center;
@@ -86,40 +103,98 @@ button {
   margin-bottom: 30px;
   max-height: 200px;
   overflow-y: auto;
+  width: 100%;
+  padding: 15px;
+  background: rgba(245, 245, 245, 0.7);
+  border-radius: 12px;
 }
 
 .lyrics-column {
-  width: 40%;
+  width: 45%;
   text-align: left;
 }
 
 .lyrics-column p {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   transition: all 0.3s;
+  padding: 5px 8px;
+  border-radius: 6px;
 }
 
-/* 高亮当前播放的歌词 */
 .lyrics-column p.highlight {
   color: #ff4500;
   font-weight: bold;
   transform: scale(1.05);
+  background: rgba(255, 69, 0, 0.1);
 }
 
-#song-place {
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: white;
-  padding: auto;
-  border-radius: 5px;
-}
-
+/* 播放器区域优化 */
 #player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
 audio {
   width: 100%;
+  max-width: 600px;
+  /* border-radius: 12px; */
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  background: #4e9ffc;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(78, 159, 252, 0.3);
+}
+
+button:hover {
+  background: #3a89e6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(78, 159, 252, 0.4);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(78, 159, 252, 0.2);
+}
+
+/* 响应式优化 */
+@media (max-width: 600px) {
+  #song-place {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  #song-title {
+    font-size: 24px;
+  }
+
+  .lyrics-container {
+    flex-direction: column;
+    gap: 10px;
+    max-height: 180px;
+  }
+
+  .lyrics-column {
+    width: 100%;
+  }
+
+  audio {
+    max-width: 100%;
+  }
 }

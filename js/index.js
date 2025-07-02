@@ -2,11 +2,12 @@
 const audio = document.getElementById("audio");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
-const backgroundImage = document.getElementById("background-image");
+const minicoverImage = document.getElementById("mini-song-cover");
 const songTitle = document.getElementById("song-title");
 const songer = document.getElementById("song-artist");
 const lyricsLeft = document.getElementById("lyrics-left");
 const lyricsRight = document.getElementById("lyrics-right");
+const player = document.getElementById("player"); // 新增：获取播放器容器
 
 let songs = []; // 存储从JSON加载的歌曲数据
 let currentIndex = 0;
@@ -16,7 +17,7 @@ let currentLyricIndex = -1; // 当前歌词行索引
 // 加载歌曲数据
 async function loadSongs() {
   try {
-    const response = await fetch("/Music_player/songs.json");
+    const response = await fetch("../songs.json");
     songs = await response.json();
     initPlayer(); // 初始化播放器
   } catch (error) {
@@ -90,21 +91,6 @@ function parseLrc(lrcText) {
   return lyrics.sort((a, b) => a.time - b.time);
 }
 
-// 更新播放器状态
-function updatePlayer() {
-  const currentSong = songs[currentIndex];
-  audio.src = currentSong.audio_url;
-  backgroundImage.style.backgroundImage = `url('${currentSong.img}')`;
-
-  // 更新歌曲信息
-  if (songTitle) {
-    songTitle.textContent = `${currentSong.name}`;
-    songer.textContent = `${currentSong.singer}`;
-  }
-
-  currentLyricIndex = -1; // 重置歌词索引
-}
-
 // 显示歌词
 function displayLyrics(lyrics) {
   lyricsLeft.innerHTML = "";
@@ -124,14 +110,62 @@ function displayLyrics(lyrics) {
   lyricsRight.innerHTML = rightLyrics.map((line) => `<p>${line}</p>`).join("");
 }
 
-// 设置音频事件监听（用于歌词同步）
+// 更新播放器状态
+function updatePlayer() {
+  const currentSong = songs[currentIndex];
+  audio.src = currentSong.audio_url;
+  minicoverImage.src = currentSong.img;
+
+  // 更新封面图后重置旋转状态
+  resetCoverRotation();
+
+  // 更新歌曲信息
+  if (songTitle) {
+    songTitle.textContent = `${currentSong.name}`;
+    songer.textContent = `${currentSong.singer}`;
+  }
+
+  currentLyricIndex = -1; // 重置歌词索引
+}
+
+// 重置封面旋转（从0度开始）
+function resetCoverRotation() {
+  const coverRotate = document.querySelector(".mini-cover-rotate");
+  if (!coverRotate) return;
+
+  // 保存当前播放状态
+  const isPlaying = !audio.paused;
+
+  // 重置动画
+  coverRotate.style.animation = "none";
+  coverRotate.style.transform = "rotate(0deg)";
+  void coverRotate.offsetWidth;
+  coverRotate.style.animation = "rotate 20s linear infinite";
+
+  // 根据保存的状态同步类
+  if (isPlaying) {
+    player.classList.add("audio-playing");
+  } else {
+    player.classList.remove("audio-playing");
+  }
+}
+
+// 设置音频事件监听（用于歌词同步和封面旋转）
 function setupAudioEvents() {
   // 音频时间更新事件（每200ms触发一次）
   audio.addEventListener("timeupdate", syncLyrics);
 
-  // 音频播放事件
+  // 播放时启动旋转
   audio.addEventListener("play", () => {
-    console.log("音频开始播放");
+    resetCoverRotation();
+    player.classList.add("audio-playing"); // 添加旋转类
+    console.log("音频播放中，封面开始旋转");
+  });
+
+  // 暂停时停止旋转
+  audio.addEventListener("pause", () => {
+    player.classList.remove("audio-playing"); // 移除旋转类
+    console.log("音频暂停，封面停止旋转");
   });
 
   // 音频结束事件（自动切换下一首）
@@ -186,6 +220,7 @@ function playPrevSong() {
   currentIndex = (currentIndex - 1 + songs.length) % songs.length;
   loadCurrentSongLyrics().then(() => {
     updatePlayer();
+    resetCoverRotation();
     audio.play();
   });
 }
@@ -195,6 +230,7 @@ function playNextSong() {
   currentIndex = (currentIndex + 1) % songs.length;
   loadCurrentSongLyrics().then(() => {
     updatePlayer();
+    resetCoverRotation();
     audio.play();
   });
 }
