@@ -40,5 +40,19 @@
     "singer": "周杰伦",
     "img": "https://img4.kuwo.cn/star/albumcover/500/47/63/494275386.jpg",
     "lrc_url": "./lrc/手写的从前-周杰伦.lrc"
+  },
+  {
+    "name": "起风了",
+    "audio_url": "./audio/起风了.mp3",
+    "singer": "买辣椒也用卷",
+    "img": "https://img4.kuwo.cn/star/albumcover/500/s4s93/20/1171025426.jpg",
+    "lrc_url": "./lrc/起风了-买辣椒也用券.lrc"
+  },
+  {
+    "name": "Love Story",
+    "audio_url": "./audio/Love Story.mp3",
+    "singer": "Taylor Swift",
+    "img": "https://img3.kuwo.cn/star/albumcover/500/s4s42/70/1639192522.jpg",
+    "lrc_url": "./lrc/Love Story-Taylor Swift.lrc"
   }
 ]
