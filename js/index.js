@@ -21,7 +21,7 @@ let currentLyricIndex = -1; // 当前歌词索引
 // 加载歌曲数据（入口函数）
 async function loadSongs() {
   try {
-    const response = await fetch("../songs.json");
+    const response = await fetch("/Music_player/songs.json");
     songs = await response.json();
     initPlayer();
   } catch (error) {
